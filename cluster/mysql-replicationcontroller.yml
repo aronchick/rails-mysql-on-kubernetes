@@ -1,0 +1,41 @@
+apiVersion: v1beta3
+kind: ReplicationController
+metadata: 
+  labels: 
+    name: mysql
+  name: mysql
+spec: 
+  replicas: 1
+  selector: 
+    name: mysql
+  template: 
+    metadata: 
+      labels: 
+        name: mysql
+    spec: 
+      volumes:
+        - name: mysql-persistent-storage
+          gcePersistentDisk:
+            pdName: mysql-disk
+            fsType: ext4
+        - name: secrets-volume
+          secret:
+            secretName: app-secrets
+      containers: 
+        - resources:
+            limits :
+              cpu: 1
+          volumeMounts:
+            - name: mysql-persistent-storage
+              mountPath: /var/lib/mysql
+            - name: secrets-volume
+              mountPath: /etc/secrets
+              readOnly: true
+          image: gcr.io/mythical-willow-91020/mysql_image:latest
+          name: mysql
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: MyInsecurePassword
+          ports: 
+            - containerPort: 3306
+              name: mysql

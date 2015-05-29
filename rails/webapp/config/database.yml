@@ -1,0 +1,33 @@
+default: &default
+  adapter: mysql2
+  pool: 5
+  timeout: 5000
+  encoding: utf8
+
+development:
+  <<: *default
+  username: app_dev
+  database: app_db_dev
+  host: <%= %x(boot2docker ip) if %x(which boot2docker).present? %>
+  password: <%= Figaro.env.mysql_app_user_password_dev_test %>
+
+test:
+  <<: *default
+  username: app_dev
+  database: app_db_test
+  host: <%= %x(boot2docker ip) if %x(which boot2docker).present? %>
+  password: <%= Figaro.env.mysql_app_user_password_dev_test %>
+
+docker_local:
+  <<: *default
+  username: app_docker_local
+  database: app_db_docker_local
+  host: <%= ENV['MYSQL_PORT_3306_TCP_ADDR'] %>
+  password: <%= Figaro.env.mysql_app_user_password_docker_local %>
+
+production:
+  <<: *default
+  username: app_production
+  database: app_db_production
+  host: mysql
+  password: <%= %x(cat /etc/secrets/mysql-production-password) if File.exists? '/etc/secrets/mysql-production-password' %> 

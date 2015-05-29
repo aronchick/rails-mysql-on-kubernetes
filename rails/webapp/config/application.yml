@@ -1,0 +1,5 @@
+# Add configuration values here, as shown below.
+#
+mysql_app_user_password_dev_test: hdX9HbgOTcnAY784Ej7kuGnB1p7YBG
+mysql_app_user_password_docker_local: 9Oehb7yGxXlQTJITiJ2I3wD0kveZaF
+secret_key_base: 91428cf517677778556c340b6d257d42d64fabf6531ab07af88cd9337edb0efc0b5581a8711a0e863d921724adb5b413fc9a7bf66a6bcbc7c97ff9b355d64370

@@ -1,0 +1,13 @@
+  <li class="list-group-item" id="item-id-<%= item.id %>">
+      <div style="overflow: auto;">
+      <div class="col-lg-10">
+      <span style="font-size: 18px;"><%= item.name %></span>
+      </div>
+      <div class="col-lg-2" style="padding-top:6px;">
+      <%= link_to 'Delete', todo_path(item.id), 
+                        :method => :delete,
+                        :remote => true,
+                        :class => "btn-sm btn-danger" %>
+      </div> 
+      </div>  
+    </li>

@@ -1,0 +1,36 @@
+apiVersion: v1beta3
+kind: ReplicationController
+metadata: 
+  labels: 
+    name: rails
+  name: rails
+spec: 
+  replicas: 1
+  selector: 
+    name: rails
+  template: 
+    metadata: 
+      labels: 
+        name: rails
+    spec: 
+      volumes:
+        - name: secrets-volume
+          secret:
+            secretName: app-secrets
+      containers: 
+        - resources:
+            limits :
+              cpu: 1
+          volumeMounts:
+            - name: secrets-volume
+              mountPath: /etc/secrets
+              readOnly: true
+          image: gcr.io/mythical-willow-91020/rails_image:latest
+          name: rails
+          env:
+            - name: PASSENGER_APP_ENV
+              value: production
+            - name: RAILS_ENV
+              value: production
+          ports: 
+            - containerPort: 80

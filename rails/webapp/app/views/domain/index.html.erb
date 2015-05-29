@@ -1,0 +1,49 @@
+  <% content_for :page_body do %>
+
+<div class="bs-docs-section">
+<div class="row">
+<div class="col-lg-12">
+<div class="page-header">
+<h1>Getting Started App</h1>
+</div>
+</div> 
+</div>
+</div>
+
+<div class="bs-docs-section">
+<div class="row">
+<div class="col-lg-12">
+  <div class="jumbotron ">
+    <h3>To Do App</h3>
+    <p>See your a simple ToDo app up and running.</p>
+    <p>
+        <%= link_to 'Go', todos_path, 
+                      :class => "btn btn-primary btn-lg" %>
+    </p>
+  </div>
+</div>
+</div>
+</div>
+
+<div class="bs-docs-section">
+<div class="row">
+<div class="col-lg-6">
+  <div class="jumbotron ">
+    <h3>Kuberneters</h3>
+    <p>Learn more about Kubernetes.</p>
+    <p><a class="btn btn-primary btn-lg">Go</a></p>
+  </div>
+</div>
+
+<div class="col-lg-6">
+  <div class="jumbotron">
+    <h3>Containers</h3>
+    <p>Learn more about containers.</p>
+    <p><a class="btn btn-primary btn-lg">Go</a></p>
+  </div>
+</div>
+
+</div>
+</div>
+
+<% end %>

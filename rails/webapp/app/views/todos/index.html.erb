@@ -1,0 +1,64 @@
+<% content_for :page_title do %>
+A Really Great Todo List
+<% end %>
+
+<% content_for :page_header do %>
+A Really Great Todo List
+<% end %>
+
+<% content_for :page_body do %>
+
+<div class="row">
+  <div class="col-sm-6">
+    <div class="panel panel-success">
+      <div class="panel-heading">
+        <h3 class="panel-title" style="font-size: 18px;">My Todo List</h3>
+      </div>
+      <div class="panel-body">
+        <ul id="all-items" class="list-group">
+          <% empty_display = "none"; %>
+          <% if !@items.blank? %>
+            <% for item in @items %>
+              <%= render :partial => 'todos/item', :locals => {item: item} %>
+            <% end %>
+          <% else %>
+            <% empty_display = "inherit"; %>
+          <% end %>
+          <li style="list-style-type: none; display: <%= empty_display %>;" id="empty-item">
+            <h5 style="color: #A1A1A1; padding-left:16px; padding-top: 6px;">
+              Nothing yet. Why not add something?
+            </h5>                
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="col-lg-6">
+  <%= form_for Item.new, {:url => todos_path(:format => :js), 
+    :method => :post,
+    :remote => true,
+    :authenticity_token => true,
+    :class => "form-horizontal" } do |f| %>
+    <fieldset>
+
+      <div class="form-group">
+        <label class="control-label col-lg-2" style="padding: 0;" for="new-item-name"><h6>Add an item</h6></label>
+        <div class="input-group col-lg-10">
+          <%= f.text_field :name, 
+          :id => "new-item-name",
+          :class => "form-control",
+          :style => "width: 95%;" %>
+          <span class="input-group-btn">
+            <%= f.submit "Add", :disable_with => 'Adding...',
+            :class => "btn btn-primary" %>
+          </span>
+        </div>
+      </div>
+      <% end %>
+    </fieldset>
+  </div>
+  <% end %>
+
